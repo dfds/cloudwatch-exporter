@@ -20,8 +20,8 @@ func main() {
 	// in LOG-GROUP-NAME:
 	resp, err := svc.GetLogEvents(&cloudwatchlogs.GetLogEventsInput{
 		Limit:         aws.Int64(100),
-		LogGroupName:  aws.String("LOG-GROUP-NAME"),
-		LogStreamName: aws.String("LOG-STREAM-NAME"),
+		LogGroupName:  aws.String("/aws/eks/hellman/cluster"),
+		LogStreamName: aws.String("kube-apiserver-audit-e331bcb7ff1ce984e4a5bdbe46adf243"),
 	})
 	if err != nil {
 		fmt.Println("Got error getting log events:")
@@ -29,18 +29,18 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println("Event messages for stream LOG-STREAM-NAME in log group LOG-GROUP-NAME:")
+	fmt.Println("Event messages for stream /aws/eks/hellman/cluster in log group kube-apiserver-audit-e331bcb7ff1ce984e4a5bdbe46adf243:")
 
-	gotToken := ""
-	nextToken := ""
+	// gotToken := ""
+	// nextToken := ""
 
 	for _, event := range resp.Events {
-		gotToken = nextToken
-		nextToken = *resp.NextForwardToken
+		// gotToken = nextToken
+		// nextToken = *resp.NextForwardToken
 
-		if gotToken == nextToken {
-			break
-		}
+		// if gotToken == nextToken {
+		// 	break
+		// }
 
 		fmt.Println("  ", *event.Message)
 	}
