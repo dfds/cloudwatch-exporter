@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cloudwatch-exporter
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+    - host: api.hellman.oxygen.dfds.cloud
+      http:
+        paths:
+          - path: /cloudwatch-exporter
+            backend:
+              serviceName: cloudwatch-exporter
+              servicePort: external

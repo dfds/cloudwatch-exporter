@@ -46,7 +46,7 @@ stages:
       inputs:
         command: 'build'
         Dockerfile: '**/Dockerfile'
-        arguments: '-t aspcoredemo'
+        arguments: '-t cloudwatch-exporter'
 
     # Push the image to ECR with a tag based on the current buildnumber
     - task: ECRPushImage@1
@@ -55,7 +55,7 @@ stages:
         awsCredentials: 'Shared-Prod ECR-Push'
         regionName: 'eu-central-1'
         imageSource: 'imagename'
-        sourceImageName: 'aspcoredemo'
+        sourceImageName: 'cloudwatch-exporter'
         repositoryName: 'ded/pipeline-example'
         pushTag: '$(Build.BuildId)'
 
